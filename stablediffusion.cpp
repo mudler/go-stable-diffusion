@@ -23,7 +23,7 @@
 
 using namespace std;
 
-int generate_image(int height, int width, int mode, int  step, int seed, const char *positive_prompt, const char *negative_prompt, const char *dst, const char *init_image)
+int generate_image(int height, int width, int mode, int  step, int seed, const char *positive_prompt, const char *negative_prompt, const char *dst, const char *init_image, const char *assets_dir)
 {
 
 	if (seed == 0) {
@@ -33,10 +33,10 @@ int generate_image(int height, int width, int mode, int  step, int seed, const c
   
 	// stable diffusion
 	cout << "----------------[init]--------------------";
-	PromptSlover prompt_slover;
-	DiffusionSlover diffusion_slover(height, width, mode);
-	DecodeSlover decode_slover(height, width);
-    EncodeSlover encode_slover(height, width);
+	PromptSlover prompt_slover(assets_dir);
+	DiffusionSlover diffusion_slover(height, width, mode, assets_dir);
+	DecodeSlover decode_slover(height, width, assets_dir);
+    EncodeSlover encode_slover(height, width, assets_dir);
 	printf(" %.2lfG / %.2lfG\n", getCurrentRSS() / 1024.0 / 1024.0 / 1024.0, getPeakRSS() / 1024.0 / 1024.0 / 1024.0);
     std::string positive_prompt_str = positive_prompt;
     std::string negative_prompt_str = negative_prompt;
