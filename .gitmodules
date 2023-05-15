@@ -1,0 +1,6 @@
+[submodule "stable-diffusion"]
+	path = stable-diffusion
+	url = https://github.com/EdVince/Stable-Diffusion-NCNN
+[submodule "ncnn"]
+	path = ncnn
+	url = git@github.com:Tencent/ncnn.git
