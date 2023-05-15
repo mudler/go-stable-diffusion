@@ -30,9 +30,10 @@ int generate_image(int height, int width, int mode, int  step, int seed, const c
 		seed = (unsigned)time(NULL);
 	}
 	
-  
+  	cout << "----------------[start stable diffusion]--------------------" << endl;
+
 	// stable diffusion
-	cout << "----------------[init]--------------------";
+	cout << "----------------[init]--------------------" << endl;
 	PromptSlover prompt_slover(assets_dir);
 	DiffusionSlover diffusion_slover(height, width, mode, assets_dir);
 	DecodeSlover decode_slover(height, width, assets_dir);

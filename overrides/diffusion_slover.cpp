@@ -31,11 +31,13 @@ DiffusionSlover::DiffusionSlover(int h, int w, int mode, string assets_dir)
 		generate_param(h, w, assets_dir);
 		param_file = "tmp-UNetModel-" + std::to_string(h) + "-" + std::to_string(w) + "-MHA-fp16.param";
 	}
+	std::filesystem::path model_path = std::filesystem::path(assets_dir) / std::filesystem::path("UNetModel-MHA-fp16.bin");
 
 	// Join the paths using std::filesystem::path::operator/() function
 	std::filesystem::path param_path = std::filesystem::path(assets_dir) / std::filesystem::path(param_file);
-	net.load_param(param_path.string().c_str());
 
+	net.load_param(param_path.string().c_str());
+	net.load_model(model_path.string().c_str());
 	std::filesystem::path sigma_path = std::filesystem::path(assets_dir) / std::filesystem::path("log_sigmas.bin");
 
 	h_size = h / 8;

@@ -38,7 +38,7 @@ void EncodeSlover::generate_param(int height, int width, string assets_dir)
 {
 	string line;
 	
-	std::filesystem::path decoder = std::filesystem::path(assets_dir) / std::filesystem::path("assets/AutoencoderKL-encoder-512-512-fp16.param");
+	std::filesystem::path decoder = std::filesystem::path(assets_dir) / std::filesystem::path("AutoencoderKL-encoder-512-512-fp16.param");
 	std::filesystem::path decoder_out = std::filesystem::path(assets_dir) / std::filesystem::path("tmp-AutoencoderKL-encoder-" + std::to_string(height) + "-" + std::to_string(width) + "-fp16.param");
 
 	ifstream encoder_file(decoder.string().c_str());
