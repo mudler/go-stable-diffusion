@@ -55,7 +55,7 @@ std::string negative_prompt_str = negative_prompt;
 	cv::Mat image(height, width, CV_8UC3);
 	x_samples_ddim.to_pixels(image.data, ncnn::Mat::PIXEL_RGB2BGR);
 	//cv::imwrite(dst, image);
-	cv::imwrite("result_" + to_string(step) + "_" + to_string(seed) + "_" + to_string(height) + "x" + to_string(width) + ".png", image);
+	cv::imwrite(dst, image);
 
 	cout << "----------------[close]-------------------" << endl;
 	
