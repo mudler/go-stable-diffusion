@@ -3,4 +3,4 @@
 	url = https://github.com/EdVince/Stable-Diffusion-NCNN
 [submodule "ncnn"]
 	path = ncnn
-	url = git@github.com:Tencent/ncnn.git
+	url = https://github.com/Tencent/ncnn
