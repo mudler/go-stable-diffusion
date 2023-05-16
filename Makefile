@@ -23,7 +23,7 @@ ncnn/build/src/libncnn.a:
 ncnn/net.h:
 	cd ncnn && cp -rfv src/* ./
 
-stablediffusion.o:
+stablediffusion.o: ncnn/build/src/libncnn.a
 	cp -rf overrides/* stable-diffusion/x86/vs2019_opencv-mobile_ncnn-dll_demo/vs2019_opencv-mobile_ncnn-dll_demo/
 	$(CXX) $(CXXFLAGS) stablediffusion.cpp -o stablediffusion.o -c $(LDFLAGS)
 
