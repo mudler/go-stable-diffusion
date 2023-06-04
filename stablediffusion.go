@@ -23,3 +23,17 @@ func GenerateImage(height, width, mode, step, seed int, positive_prompt, negativ
 	}
 	return nil
 }
+
+func GenerateImageUpscaled(height, width, step, seed int, positive_prompt, negative_prompt, dst, asset_dir string) error {
+	pp := C.CString(positive_prompt)
+	np := C.CString(negative_prompt)
+	ad := C.CString(asset_dir)
+
+	destination := C.CString(dst)
+
+	ret := C.generate_image_upscaled(C.int(height), C.int(width), C.int(step), C.int(seed), pp, np, destination, ad)
+	if ret != 0 {
+		return fmt.Errorf("failed")
+	}
+	return nil
+}

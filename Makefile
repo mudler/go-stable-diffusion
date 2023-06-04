@@ -26,12 +26,13 @@ ncnn/net.h:
 stablediffusion.o: ncnn/build/src/libncnn.a
 	cp -rf overrides/* stable-diffusion/x86/vs2019_opencv-mobile_ncnn-dll_demo/vs2019_opencv-mobile_ncnn-dll_demo/
 	$(CXX) $(CXXFLAGS) stablediffusion.cpp -o stablediffusion.o -c $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) stablediffusion.cpp -o stablediffusion-hires.o -c $(LDFLAGS)
 
 unpack: ncnn/build/src/libncnn.a
 	mkdir -p unpack && cd unpack && ar x ../ncnn/build/src/libncnn.a
 
 libstablediffusion.a: stablediffusion.o unpack $(EXTRA_TARGETS)
-	ar src libstablediffusion.a stablediffusion.o $(shell ls unpack/* | xargs echo)
+	ar src libstablediffusion.a stablediffusion-hires.o stablediffusion.o $(shell ls unpack/* | xargs echo)
 
 example/main: libstablediffusion.a
 	@C_INCLUDE_PATH=${INCLUDE_PATH} LIBRARY_PATH=${LIBRARY_PATH} go build -x -o example/main ./example

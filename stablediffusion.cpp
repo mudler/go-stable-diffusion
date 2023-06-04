@@ -20,6 +20,7 @@
 #include <ctime>
 #include "getmem.h"
 #include "stablediffusion.h"
+#include "stablediffusion.hpp"
 
 using namespace std;
 
@@ -77,5 +78,33 @@ int generate_image(int height, int width, int mode, int  step, int seed, const c
 
 	cout << "----------------[close]-------------------" << endl;
 	
+	return 0;
+}
+
+int generate_image_upscaled( int height, int width, int  step, int seed, const char *positive_prompt, const char *negative_prompt, const char *dst, const char *assets_dir)
+{
+	std::cout << "----------------[start]------------------" << std::endl;
+    std::cout << "positive_prompt: " << positive_prompt << std::endl;
+    std::cout << "output_png_path: " << dst << std::endl;
+    std::cout << "negative_prompt: " << negative_prompt << std::endl;
+    std::cout << "step: " << step << std::endl;
+    std::cout << "seed: " << seed << std::endl;
+    std::cout << "----------------[prompt]------------------" << std::endl;
+    auto [cond, uncond] = prompt_solver( positive_prompt, negative_prompt, assets_dir );
+    std::cout << "----------------[diffusion]---------------" << std::endl;
+    ncnn::Mat sample = diffusion_solver( seed, step, cond, uncond , assets_dir);
+    std::cout << "----------------[decode]------------------" << std::endl;
+    ncnn::Mat x_samples_ddim = decoder_solver( sample, assets_dir );
+    std::cout << "----------------[4x]--------------------" << std::endl;
+    x_samples_ddim = esr4x( x_samples_ddim, assets_dir );
+    std::cout << "----------------[save]--------------------" << std::endl;
+    {
+        std::vector<std::uint8_t> buffer;
+        //buffer.resize( 512 * 512 * 3 );
+        buffer.resize( height * width * 3 );
+        x_samples_ddim.to_pixels( buffer.data(), ncnn::Mat::PIXEL_RGB );
+        save_png( buffer.data(), height, width, 0, dst );
+    }
+    std::cout << "----------------[close]-------------------" << std::endl;
 	return 0;
 }
