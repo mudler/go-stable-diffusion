@@ -794,7 +794,8 @@ inline static std::pair<ncnn::Mat, ncnn::Mat> prompt_solver( std::string const& 
 	    net.load_model(model_path.string().c_str());
         // 读取tokenizer字典
         std::ifstream infile;
-        std::string pathname = "assets/vocab.txt";
+        std::filesystem::path vocab_path = std::filesystem::path(assets_dir) / std::filesystem::path("vocab.txt");
+        std::string pathname = vocab_path.string();
         infile.open( pathname.data() );
         std::string s;
         int idx = 0;
