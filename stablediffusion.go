@@ -1,7 +1,7 @@
 package stablediffusion
 
-// #cgo CXXFLAGS: -I./ -I./ncnn/src -I./ncnn -I./ncnn/build/src/ -I./stable-diffusion/x86/vs2019_opencv-mobile_ncnn-dll_demo/vs2019_opencv-mobile_ncnn-dll_demo/ -std=c++17
-// #cgo LDFLAGS: -L./ -lstablediffusion -lgomp -lopencv_core -lopencv_imgcodecs -lm -lstdc++
+// #cgo CXXFLAGS: -I${SRCDIR}/ -I${SRCDIR}/ncnn/src -I${SRCDIR}/ncnn -I${SRCDIR}/ncnn/build/src/ -I${SRCDIR}/stable-diffusion/x86/vs2019_opencv-mobile_ncnn-dll_demo/vs2019_opencv-mobile_ncnn-dll_demo/ -std=c++17
+// #cgo LDFLAGS: -L${SRCDIR}/ -lstablediffusion -lgomp -lopencv_core -lopencv_imgcodecs -lm -lstdc++
 // #include "stablediffusion.h"
 // #include <stdlib.h>
 import "C"
