@@ -27,7 +27,7 @@ stablediffusion.o: ncnn/build/src/libncnn.a
 	$(CXX) $(CXXFLAGS) stablediffusion.cpp -o stablediffusion-hires.o -c $(LDFLAGS)
 
 unpack: ncnn/build/src/libncnn.a
-	mkdir -p unpack && cd unpack && ar x ../ncnn/build/src/libncnn.a
+	mkdir -p unpack && cd unpack && ar x ../ncnn/build/src/libncnn.a && rm __.SYMDEF
 
 libstablediffusion.a: stablediffusion.o unpack $(EXTRA_TARGETS)
 	ar src libstablediffusion.a stablediffusion-hires.o stablediffusion.o $(shell ls unpack/* | xargs echo)
