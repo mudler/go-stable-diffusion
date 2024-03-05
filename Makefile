@@ -19,7 +19,7 @@ $(info I llama.cpp build info: )
 
 ncnn/build/src/libncnn.a:
 	cd ncnn && mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DNCNN_VULKAN=OFF -DNCNN_BUILD_EXAMPLES=ON .. && make -j$(shell nproc)
-	cd ncnn && cp -rfv src/* ./
+	cd ncnn && cp -rf src/* ./
 
 stablediffusion.o: ncnn/build/src/libncnn.a
 	cp -rf overrides/* stable-diffusion/x86/vs2019_opencv-mobile_ncnn-dll_demo/vs2019_opencv-mobile_ncnn-dll_demo/
