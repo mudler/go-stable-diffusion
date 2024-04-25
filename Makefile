@@ -18,7 +18,7 @@ CXXFLAGS += -Wall -Wextra -Wpedantic -Wcast-qual -Wno-unused-function
 $(info I llama.cpp build info: )
 
 ncnn/build/src/libncnn.a:
-	cd ncnn && mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DNCNN_VULKAN=OFF -DNCNN_BUILD_EXAMPLES=ON .. && make -j$(shell nproc)
+	cd ncnn && mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DNCNN_VULKAN=OFF -DNCNN_BUILD_EXAMPLES=ON .. && make
 	cd ncnn && cp -rf src/* ./
 
 stablediffusion.o: ncnn/build/src/libncnn.a
