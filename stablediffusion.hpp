@@ -311,7 +311,7 @@ static inline ncnn::Mat randn_4_64_64( int seed )
 {
     std::vector<float> arr;
     {
-        std::mt19937 gen{ static_cast<unsigned long>( seed ) };
+        std::mt19937 gen{ static_cast<std::mt19937::result_type>(seed) };
         std::normal_distribution<float> d{0.0f, 1.0f};
         arr.resize( 64 * 64 * 4 );
         std::for_each( arr.begin(), arr.end(), [&]( float & x )
